@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <title>세미프로젝트</title>
 <link th:href="@{/static/css/base.css}" rel="stylesheet">
+<style>
+	/* 회원가입폼에 대한 스타일 */
+	#join { border:1px solid blue;
+		width: 300px; margin:0 auto; }
+	#join div { margin-bottom: 10px }
+	#join label { width: 110px; display: inline-block; 
+			text-align: right; font-weight: bold }
+	#join input { padding: 3px }
+	#okbtn { margin-left: 115px }
+</style>
 </head>
 <body>
 	<div id="container">
@@ -27,7 +37,7 @@
 			<div><label for="eml">이메일</label>
 			<input type="text" name="email" id="eml"></div>
 			
-			<div><button type="button" id="okbtn">입력완료</button>
+			<div><button type="button" id="okbtn">입력 완료</button>
 			<button type="reset">다시 입력</button></div>			
 		</form>
 	</div>
