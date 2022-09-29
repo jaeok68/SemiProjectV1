@@ -1,5 +1,8 @@
 package ljo.spring.mvc.service;
 
-public interface MemberService {
+import ljo.spring.mvc.vo.MemberVO;
 
+public interface MemberService {
+	
+	boolean newMember(MemberVO mvo);
 }
