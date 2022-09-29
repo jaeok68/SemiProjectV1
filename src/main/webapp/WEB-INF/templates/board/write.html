@@ -2,13 +2,50 @@
 <html xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
 layout:decorate="~{fragments/layout}">
-
+<body>
 <th:block layout:fragment="mystyle"></th:block>
 
 <th:block layout:fragment="main">	
 	<div id="main">
 		<h1>게시판 새글쓰기</h1>
+
+		<form name="board" id="board">
+			<div><label for="uid">아이디</label></div>
+			
+			<div><label for="nm">제목</label>
+			<input type="text" name="title" id="tt"></div>			
+			
+			<div><label for="nm">본문</label>
+			        <textarea name="contexts" id="ctx"></textarea>
+			</div>
+			
+			<div><button type="button" id="okbtn">입력 완료</button></div>
+			
+		</form>
+	
+			
 	</div>	
 </th:block>
 
 <th:block layout:fragment="myscript"></th:block>
+
+	<script>
+		var okbtn = document.getElementById("okbtn");
+		okbtn.addEventListener('click', checkjoinfrm);
+		
+		function checkjoinfrm(){
+			var uid = document.getElementById("uid");
+			var tt = document.getElementById("tt");
+			var ctx = document.getElementById("ctx");
+			
+			if (uid.value == '') alert('제목을 입력하세요');
+			else if(pwd.value == '') alert('본문을 입력하세요');
+			else {
+				var frm = document.board;
+				frm.method = "post";
+				frm.submit();
+			}
+		}
+	</script>
+</body>
+</html>
