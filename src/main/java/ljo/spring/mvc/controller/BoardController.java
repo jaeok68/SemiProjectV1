@@ -16,7 +16,6 @@ public class BoardController {
 	
 	private Logger LOGGER = LoggerFactory.getLogger(getClass());
 	
-	// bean클래스로 정의한 경우 @Autowired 어노테이션 생략 가능
 	@Autowired
 	private BoardService brsv;
 
