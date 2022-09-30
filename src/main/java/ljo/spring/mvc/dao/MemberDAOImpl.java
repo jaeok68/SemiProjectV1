@@ -1,10 +1,14 @@
 package ljo.spring.mvc.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collections;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -17,13 +21,13 @@ import ljo.spring.mvc.vo.MemberVO;
 @Repository("mdao")
 public class MemberDAOImpl implements MemberDAO {
 
-    //@Autowired //bean태그에 정의한 경우 생략가능
-    //private JdbcTemplate jdbcTemplate;
+    @Autowired //bean태그에 정의한 경우 생략가능
+    private JdbcTemplate jdbcTemplate;
     private SimpleJdbcInsert simpleJdbcInsert;    
     private NamedParameterJdbcTemplate jdbcNameTemplate;
     
-    private RowMapper<MemberVO> memberMapper =
-    		BeanPropertyRowMapper.newInstance(MemberVO.class);
+ //   private RowMapper<MemberVO> memberMapper =
+ //   		BeanPropertyRowMapper.newInstance(MemberVO.class);
     
     public MemberDAOImpl(DataSource dataSource) {
     	simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
@@ -46,8 +50,20 @@ public class MemberDAOImpl implements MemberDAO {
     public MemberVO selectOneMember() {
     	String sql = "select userid, name, email, regdate from member where mno = 1 ";
     	
-    	return jdbcNameTemplate.queryForObject(sql, Collections.emptyMap(), memberMapper);
+    	RowMapper<MemberVO> memberMapper = (rs, num) -> {
+			MemberVO m = new MemberVO();
+			
+			m.setUserid(rs.getString("userid"));
+			m.setName(rs.getString("name"));
+			m.setEmail(rs.getString("email"));
+			m.setRegdate(rs.getString("regdate"));
+			
+			return m;
+		};
+		
+		return jdbcTemplate.queryForObject(sql, null, memberMapper);
     }
+    
     
     
 }
