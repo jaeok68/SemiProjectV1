@@ -1,7 +1,10 @@
 package ljo.spring.mvc.dao;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import ljo.spring.mvc.vo.BoardVO;
@@ -9,8 +12,9 @@ import ljo.spring.mvc.vo.BoardVO;
 @Repository("bdao")
 public class BoardDAOImpl implements BoardDAO{
 
-    @Autowired
+    //@Autowired
     private JdbcTemplate jdbcTemplate;
+
     
     @Override
     public int insertBoard(BoardVO bvo) {
@@ -21,8 +25,6 @@ public class BoardDAOImpl implements BoardDAO{
         		bvo.getContents()
         };
         	
-        
-        
         return jdbcTemplate.update(sql, params);
     }
 }

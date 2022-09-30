@@ -1,21 +1,21 @@
 package ljo.spring.mvc.vo;
 
 public class BoardVO {
-	private Integer bno;
+	private String bno;
 	private String title;	
 	private String userid;
 	private String regdate;
-	private Integer views;
+	private String views;
 	private String contents;
 	
 	public BoardVO() {
 	}
 
-	public Integer getBno() {
+	public String getBno() {
 		return bno;
 	}
 
-	public void setBno(Integer bno) {
+	public void setBno(String bno) {
 		this.bno = bno;
 	}
 
@@ -43,11 +43,11 @@ public class BoardVO {
 		this.regdate = regdate;
 	}
 
-	public Integer getViews() {
+	public String getViews() {
 		return views;
 	}
 
-	public void setViews(Integer views) {
+	public void setViews(String views) {
 		this.views = views;
 	}
 
@@ -61,8 +61,9 @@ public class BoardVO {
 
 	@Override
 	public String toString() {
-		return "BoardVO [bno=" + bno + ", title=" + title + ", userid=" + userid + ", regdate=" + regdate + ", views="
-				+ views + ", contents=" + contents + "]";
+		String frm = "BoardVO [bno=%s, title=%s, userid=%s, regdate=%s, views=%s, contents=%s]";
+		String result = String.format(frm, bno, title, userid, regdate, views, contents);
+		return result;
 	}
 
 
