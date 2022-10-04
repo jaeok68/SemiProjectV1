@@ -24,6 +24,8 @@ public class MemberController {
 	protected Logger LOGGER = 
 			LoggerFactory.getLogger(getClass());
 	
+	// 로그인 안했다면 -> join/join
+	// 로그인 했다면 -> join/myinfo
 	@GetMapping("/join")
 	public String join() {
 		LOGGER.info("join호출");
@@ -66,11 +68,20 @@ public class MemberController {
 		return "redirect:/";
 	}		
 	
+	// 로그인 안했다면 -> redirect:/login
+	// 로그인 했다면 -> join/myinfo
 	@GetMapping("/myinfo")
-	public String myinfo(Model m) {
-		m.addAttribute("mbr", msrv.readOneMember());
+	public String myinfo(Model m, HttpSession sess) {
+		String returnPage = "join/myinfo";
 		
-		return "join/myinfo";
+		if (sess.getAttribute("m") != null) {
+			MemberVO mvo = (MemberVO) sess.getAttribute("m");
+			m.addAttribute("mbr", msrv.readOneMember(mvo.getUserid()));
+		}else {
+			returnPage = "redirect:/login";
+		}
+		
+		return returnPage;
 	}	
 	
 }
