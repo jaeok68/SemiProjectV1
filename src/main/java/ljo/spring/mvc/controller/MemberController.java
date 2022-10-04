@@ -27,9 +27,13 @@ public class MemberController {
 	// 로그인 안했다면 -> join/join
 	// 로그인 했다면 -> join/myinfo
 	@GetMapping("/join")
-	public String join() {
-		LOGGER.info("join호출");
-		return "join/join";
+	public String join(HttpSession sess) {
+		String returnPage = "join/join";
+		
+		if (sess.getAttribute("m") != null)  
+			returnPage = "redirect:/myinfo";
+
+		return returnPage;
 	}
 	
 	@PostMapping("/join")
