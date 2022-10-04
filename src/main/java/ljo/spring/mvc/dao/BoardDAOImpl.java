@@ -2,7 +2,9 @@ package ljo.spring.mvc.dao;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -46,10 +48,13 @@ public class BoardDAOImpl implements BoardDAO{
     }
     
     @Override
-    public List<BoardVO> selectBoard(){
-    	String sql = "select bno, title, userid, regdate, views from board order by bno desc";
+    public List<BoardVO> selectBoard(int snum){
+    	String sql = "select bno, title, userid, regdate, views from board order by bno desc limit :snum, 25";
     	
-    	return jdbcNamedTemplate.query(sql, Collections.emptyMap(), boardMapper);
+    	Map<String, Object> params = new HashMap<>();
+    	params.put("snum", snum);
+    	
+    	return jdbcNamedTemplate.query(sql, params, boardMapper);
     }
 
 	@Override
