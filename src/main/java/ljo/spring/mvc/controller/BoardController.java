@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import ljo.spring.mvc.service.BoardService;
 import ljo.spring.mvc.vo.BoardVO;
@@ -30,8 +31,12 @@ public class BoardController {
 	}
 	
 	@GetMapping("/view")	
-	public String view() {
-		return "board/view";
+	public ModelAndView view(ModelAndView mv, String bno) {
+		
+		mv.setViewName("board/view");
+		mv.addObject("bd", brsv.readOneBoard(bno));
+		
+		return mv;
 	}	
 	
 	@GetMapping("/write")

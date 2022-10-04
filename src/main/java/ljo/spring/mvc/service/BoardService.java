@@ -10,5 +10,6 @@ public interface BoardService {
 
 	List<BoardVO> readBoard();
 
+	BoardVO readOneBoard(String bno);
 	
 }
