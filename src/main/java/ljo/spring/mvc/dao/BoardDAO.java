@@ -12,5 +12,7 @@ public interface BoardDAO {
 
 	BoardVO selectOneBoard(String bno);
 
+	int selectCountBoard();
+
 
 }

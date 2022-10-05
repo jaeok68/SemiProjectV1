@@ -59,6 +59,7 @@ public class BoardController {
 		int snum = (cpage -1) * perPage;
 		int stpgn = ((cpage-1)/10)*10 + 1;
 		
+		m.addAttribute("pages", bsrv.readCountBoard());
 		m.addAttribute("bdlist", bsrv.readBoard(snum));
 		m.addAttribute("stpgn", stpgn);
 		//m.addAttribute("cpg", cpage);
