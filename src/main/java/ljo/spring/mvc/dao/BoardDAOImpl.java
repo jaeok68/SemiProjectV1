@@ -67,7 +67,7 @@ public class BoardDAOImpl implements BoardDAO{
     	
     	Map<String, Object> params = new HashMap<>();
     	params.put("snum", snum);
-    	params.put("fval", "%"+fval+"%");
+    	params.put("fval", "%" + fval + "%");
     	
     	return jdbcNamedTemplate.query(sql.toString(), params, boardMapper);
     }
