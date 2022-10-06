@@ -96,6 +96,42 @@ public class BoardController {
 			LOGGER.info("새글쓰기 성공~!!");		
 		
 		return "redirect:/list";
-	}		
+	}
+	
+    @GetMapping("/del")
+    public String remove(HttpSession sess, String bno) {
+    	String returnPage = "redirect:/list?cpg=1";
+    	
+        if (sess.getAttribute("m") == null)
+        	returnPage = "redirect:/login";
+        else
+        	bsrv.removeBoard(bno);
+        
+        return returnPage;
+    }
+    
+    @GetMapping("/upd")
+    public String modify(HttpSession sess, String bno, Model m) {
+    	String returnPage = "board/update";
+    	
+    	if (sess.getAttribute("m") == null)
+        	returnPage = "redirect:/login";
+    	else
+    		m.addAttribute("bd", bsrv.readOneBoard(bno)) ;
+        
+        return returnPage;
+    }    
+    
+    @PostMapping("/upd")
+    public String modifyok(HttpSession sess, BoardVO bvo) {
+    	String returnPage = "redirect:/view?bno=" + bvo.getBno();
+    	
+    	if (sess.getAttribute("m") == null)
+        	returnPage = "redirect:/login";
+    	else
+    		bsrv.modifyBoard(bvo) ;
+        
+        return returnPage;
+    }        
 	
 }

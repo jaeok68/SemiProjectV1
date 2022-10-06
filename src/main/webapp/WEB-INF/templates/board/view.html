@@ -37,8 +37,10 @@ layout:decorate="~{fragments/layout}">
 				<span th:text="${bd.contents}" id="cnts"></span></div>
 			<div><label></label>
 				<button type="button" id="go2list">목록으로</button>
-				<button type="button" id="go2upd">수정하기</button>
-				<button type="button" id="go2del">삭제하기</button>				
+				<th:block th:if="${session.m != null and session.m.userid == bd.userid}">
+					<button type="button" id="go2upd">수정하기</button>
+					<button type="button" id="go2del">삭제하기</button>
+				</th:block>				
 			</div>
 		</div>
 	</div>
@@ -52,8 +54,8 @@ layout:decorate="~{fragments/layout}">
 		let cnts = document.querySelector('#cnts');
 		
 		go2list.addEventListener('click', go2lists);
-		go2upd.addEventListener('click', go2upds);
-		go2del.addEventListener('click', go2dels);
+		go2upd?.addEventListener('click', go2upds);
+		go2del?.addEventListener('click', go2dels);
 
 		function go2lists(){
 			location.href = '/list'; 
