@@ -26,7 +26,7 @@ public class BoardDAOImpl implements BoardDAO{
     	
     	Map<String, Object> params = new HashMap<>();
     	params.put("fkey", fkey);
-    	params.put("fval", fval);
+    	params.put("fval", "%"+fval+"%");
     	params.put("snum", snum);
     	
     	return sqlSession.selectList("board.selectBoard", params);
@@ -45,7 +45,7 @@ public class BoardDAOImpl implements BoardDAO{
 	public int selectCountBoard(String fkey, String fval) {
     	Map<String, Object> params = new HashMap<>();
     	params.put("fkey", fkey);
-    	params.put("fval", fval);
+    	params.put("fval", "%"+fval+"%");
     	
 		return sqlSession.selectOne("board.selectCountBoard", params);
 	}
