@@ -153,7 +153,7 @@ public class BoardController {
     
     @PostMapping("/upd")
     public String modifyok(HttpSession sess, BoardVO bvo) {
-    	String returnPage = "redirect:/view?bno=" + bvo.getBno();
+    	String returnPage = "redirect:/view?bno=" +  bvo.getBno();
     	
     	if (sess.getAttribute("m") == null)
         	returnPage = "redirect:/login";
