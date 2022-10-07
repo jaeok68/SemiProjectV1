@@ -11,10 +11,10 @@ public interface MemberDAO {
 
 	MemberVO selectOneMember(String uid);
 
-	int selectOneMember(MemberVO mvo);
-
 	int selectCountUserid(String uid);
 
 	List<Zipcode> selectZipcode(String dong);
+
+	int selectOneMember(MemberVO mvo);
 
 }
