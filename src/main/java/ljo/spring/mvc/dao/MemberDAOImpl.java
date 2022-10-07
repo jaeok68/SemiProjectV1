@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -27,6 +28,9 @@ public class MemberDAOImpl implements MemberDAO {
     private SimpleJdbcInsert simpleJdbcInsert;    
     private NamedParameterJdbcTemplate jdbcNameTemplate;
     
+    @Autowired
+    private SqlSession sqlSession;
+    
  //   private RowMapper<MemberVO> memberMapper =
  //   		BeanPropertyRowMapper.newInstance(MemberVO.class);
     private RowMapper<Zipcode> zipcodeMapper =
@@ -43,12 +47,10 @@ public class MemberDAOImpl implements MemberDAO {
  
     @Override
     public int insertMember(MemberVO mvo) {
-    	SqlParameterSource params = 
-    			new BeanPropertySqlParameterSource(mvo);
-    	
-		return simpleJdbcInsert.execute(params);
+    	return sqlSession.insert("member.insertMember", mvo);
     }
     
+
     @Override
     public MemberVO selectOneMember(String uid) {
     	String sql = "select userid, name, email, regdate from member where userid = ?";
